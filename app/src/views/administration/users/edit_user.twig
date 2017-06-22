@@ -1,0 +1,62 @@
+{% extends "templates/panel.twig" %}{% block content %}
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			
+			<!-- Box Header -->
+			<div class="box-header with-border">
+				
+				<div class="row">
+					
+					<!-- Title & Tools -->
+				<h1 class="box-title col-sm-10">Change User Information<br>
+				<small>Change User Email, First and Last names here</small></h1>
+					<div class="box-tools pull-right col-md-2">
+						<a href="{{ app.urlFor('delete-user', {'userID': editUser.id}) }}">
+							<button class="btn btn-danger pull-right" type="button" data-toggle="tooltip" title="Delete User"><i class='fa fa-trash'></i></button>
+						</a>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="box-body">
+				<div class="form-group">
+    				<label class="col-sm-1" style="padding-right: 25px;"><span class="pull-right">Display Name</span></label>
+    				<div class="col-sm-11">
+    				{{ editUser.getFullOrUsername(false) }}
+    				</div>
+				</div><br>
+				
+				{% include "templates/form_builder/form_builder.twig" with formUserInfo only %}
+			</div>
+					
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			
+			<!-- Box Header -->
+			<div class="box-header with-border">
+				
+				<div class="row">
+					
+					<!-- Title -->
+					<h1 class="box-title col-sm-10">Reset User Password</h1>
+				</div>
+				
+			</div>
+			
+			<div class="box-body">
+				{% include "templates/form_builder/form_builder.twig" with formResetPassword only %}
+			</div>
+					
+		</div>
+	</div>
+</div>
+
+{% endblock %}

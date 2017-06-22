@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   
+    <title> {{title}} </title>
+    <base href="{{base}}">
+    
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{base}}/libraries/bootstrap/css/bootstrap.min.css">
+   
+   
+    {# Allows Controllers to define stylesheets to be loaded into the base template #}
+    {% if stylesheets is defined %}
+        {% for url in stylesheets %}
+   
+    <link rel="stylesheet" type="text/css" href="{{base}}{{url}}">
+   
+        {% endfor %}
+    {% endif %}
+    
+    {% block head %}{% endblock %}
+   
+    {# Allows Controllers to define scripts to be loaded into the base template #}
+    {% if scripts is defined %}
+        {% for url in scripts %}
+   
+    <script src="{{base}}{{url}}"></script>
+   
+        {% endfor %}
+    {% endif %}
+    
+    
+    <!-- JQuery -->
+    <script src="{{base}}/libraries/jquery/jquery-3.1.1.min.js"></script>
+   
+    <!-- Bootstrap -->
+    <script src="{{base}}/libraries/bootstrap/js/bootstrap.min.js"></script>
+   
+</head>
+{% block body %}
+<body>
+ 
+    {# Primary Content block, Views will be loaded here #}
+    {% block content %}{% endblock %}
+   
+    {# if form_data is defined this script will be loaded and populated
+        with autofill data contained within it populated by responsible Controller #}
+   
+    {% if formData is defined %}
+    <!-- Generated -Used to populate forms with sent post data -->
+    <script type="text/javascript">
+ 
+       
+        $(document).ready(function() {
+            
+        	//Generated FormData array
+        	var formData = {{ formData|json_encode|raw }};
+
+			for(var key in formData) {
+				$('input[name=\'' + key + '\']').val(formData[key]);
+			}
+			
+        });
+ 
+    </script>  
+    {% endif %}
+   
+    {# if formErrors is defined this script will be loaded and highlight errors for paricular fields #}
+       
+    {% if formErrors is defined %}
+    <!-- Used to populate forms with sent post data -->
+    <script type="text/javascript">
+ 
+       
+        $(document).ready(function() {
+ 
+            {# Form Data #}
+            populateForm({
+            {% for name, message in formErrors %}
+                {{name}}:'{{message}}',
+            {% endfor %}
+            });
+ 
+        });
+ 
+        function populateForm(formData) {
+            for(var name in formData) {
+                var message = formData[name];
+
+                
+            }
+        }
+       
+    </script>  
+    {% endif %}
+   
+</body>
+{% endblock %}
+</html>

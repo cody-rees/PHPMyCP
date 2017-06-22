@@ -1,0 +1,54 @@
+{# Twig Form Builder - Automatically builds forms using a given array of values #}
+{# Author: By Cody Rees-Whitley - 2016-2017 #}
+ 
+ {# If fieldsonly is defined ensures form is not drawn #}
+{% if fieldsonly is not defined or fieldsonly == false %}
+<!-- Form -->
+<form method="{{ method|default('POST') }}" class="{{ class|default(['form-horizontal'])|join(' ') }}" action="{{ action|default('') }}">
+{% endif %}
+
+
+    {# Generate Sections #}
+    {% for id, section in sections %}
+    
+    
+        {# Adds Section Seperator between form-groups #}
+        {% if sections|first != section %}
+        <div class="seperator"></div>
+        {% endif %}
+    
+    	{# Render Section #}
+        <!-- Form Section: {{id}} -->
+        <div id="{{id}}">
+        
+        {# Generate Form Groups #}
+        {% for groupID, data in section %}
+ 		
+ 			{# Draw form Group#}
+            {% include 'templates/form_builder/form_group.twig' with {'groupID': groupID, 'data': data} only %}       
+        
+        {% endfor %}	
+        
+        </div>
+        <!-- /Form Section: {{id}} -->
+        
+        
+    {% endfor %}
+ 
+ 
+<div class="seperator"></div>
+  
+  
+{# Draw Submit Button(s) #}    
+{% if submit is defined %} 
+	{% include "templates/form_builder/submit.twig" %}
+{% endif %}
+ 
+
+
+ 
+ {# If fieldsonly is defined ensures form is not drawn #}
+{% if fieldsonly is not defined or fieldsonly == false %}
+</form>
+<!-- /Form -->
+{% endif %}

@@ -1,0 +1,25 @@
+{% set divClass = [data['type']|default('radio'), 'col-sm-11'] %}
+
+{# Form Label #}
+{% if data['label'] is defined %}
+<label for='{{ groupID }}'{{ attr('labelClass', data, ['col-sm-1', 'control-label'], 'class') }}>{{ data['label']|default('')|raw }}</label>
+
+{% else %}
+
+{# If label is not present, Offset divClass by 1 #}
+{% set divClass = [data['type']|default('radio'), 'col-sm-11', 'col-sm-offset-1'] %}
+
+{% endif %}
+
+	
+<div {{ attr('divClass', data, divClass, 'class') }}>
+
+	<label>
+	<input id="{{ groupID }}" type="{{ data['type']|default('radio') }}" 
+	    {{ attr('class',    data) }} 
+	    {{ attr('name',     data) }}
+	    {{ attr('value',    data) }}
+	    {{ attr('toggle',   data) }}
+	    {{ prop('disabled', data) }}
+	    {{ prop('selected', data, 'checked') }}>{{ data['inputText']|default('') }}</label>
+</div>	

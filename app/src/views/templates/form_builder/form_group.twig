@@ -1,0 +1,18 @@
+
+{# Insert HTML Before #}
+{{ data['htmlBefore']|default('')|raw }}
+
+
+<!-- Form Group: {{groupID}} -->
+<div class="{{ data['divClass']|default(['form-group'])|join(' ') }}">
+
+{# Draw input based on type #}
+{% include 'templates/form_builder/input_types/'~ data['type']|default('text') ~'.twig' %}
+
+</div>
+<!-- /Form Group:  {{groupID}} -->
+
+
+{# Insert HTML After #}
+{{ data['htmlAfter']|default('')|raw }}	
+		

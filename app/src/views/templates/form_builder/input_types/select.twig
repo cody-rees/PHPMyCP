@@ -1,0 +1,36 @@
+{# Template Generates Form Group SELECT input type #}
+{% set divClass = ['col-sm-11'] %}
+
+{# Form Label #}
+{% if data['label'] is defined %}
+<label for='{{ groupID }}'{{ attr('labelClass', data, ['col-sm-1', 'control-label'], 'class') }}>{{ data['label']|default('')|raw }}</label>
+
+{% else %}
+
+{# If label is not present, Offset divClass by 1 #}
+{% set divClass = ['col-sm-11', 'col-sm-offset-1'] %}
+
+{% endif %}
+
+{# Form Input #}
+<div {{ attr('divClass', data, divClass, 'class') }}">
+
+	<select id="{{ groupID }}" 
+	    {{ attr('class', data, ['form-control']) }} 
+	    {{ attr('id',    data) }}
+	    {{ attr('name',  data) }}
+	    {{ prop('disabled', data) }}>
+		
+		<option>Please Select...</option>
+		
+		{# Select Options #}
+		{% for id, option in data['options'] %}
+			
+		<option id={{ id }} value="{{ id }}" 
+	        {{ attr('class', option) }} 
+	        {{ prop('selected', option) }}>{{ option['label'] }}</option>
+			
+		{% endfor %}
+		
+	</select>
+</div>

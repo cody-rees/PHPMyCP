@@ -1,0 +1,35 @@
+{% extends "templates/base.twig" %} {% block content %}
+<div class="content">
+	
+
+	<div class="login center-block">
+		<h4>Dashboard Login <span class="glyphicon glyphicon-user pull-right"></span></h4>
+		
+		<div class="seperator"></div>
+		
+		<form method="post">
+			{# Displays Errors messages from previous form posts if exists #}
+			{% if errorMessage is defined %}
+			<div class="alert alert-danger" role="alert">{{ errorMessage }}</div>
+			{% elseif redirect is defined %}
+			<div class="alert alert-danger" role="alert">Please log in to access this page.</div>
+			{% endif %}
+			
+			<div class="input-group">
+				<label  class="control-label" for="input-login">Email</label>
+				<input type="text" id="input-login" name="input-login" class="form-control" placeholder="Email">
+			</div><br>
+		
+			<div class="input-group">
+				<label  class="control-label" for="input-password">Password</label>
+				<input type="password" id="input-password" name="input-password" class="form-control" placeholder="Password">
+			</div><br><br>
+			
+			<div class="seperator"></div>
+			
+			<button class="btn btn-info" type="submit">Login</button>
+			<div class="seperator"></div><br>
+		</form>
+	</div>
+</div>
+{% endblock %}

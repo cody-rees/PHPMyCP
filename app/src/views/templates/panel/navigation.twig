@@ -1,0 +1,86 @@
+
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+   
+	<!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      
+      <!-- sidebar menu: style can be found in sidebar.less -->
+      <ul class="sidebar-menu">
+        
+    	{% for category in navigation.categories() %}
+    		<li class="header">
+    			
+    	        {% if category.tagline() is iterable %}
+    				<i class="fa fa-{{ category.tagline()[0] }}"></i>
+    			    <span>{{ category.tagline()[1] }}</span>		
+    		    {% else %}
+    			    <span>{{ category.tagline() }}</span>										
+    		    {% endif %}
+    			
+    		</li>
+    		
+    		{% for item in category.items() %}
+    			
+    			{% if item.isDropdown() %}
+    			<li class="treeview{% if active == item.name() %} active{% endif %}">
+    				<a href="#">
+    				
+    			        {% if item.tagline() is iterable %}
+    						<i class="fa fa-{{ item.tagline()[0] }}"></i>
+    					    <span>{{ item.tagline()[1] }}</span>		
+    				    {% else %}
+    					    <span>{{ item.tagline() }}</span>										
+    				    {% endif %}
+    				
+    					<i class="fa fa-angle-left pull-right"></i>
+    				</a>
+    				
+    				
+    				<!-- Dropdown Menu -->
+    				<ul class="treeview-menu">
+    				
+    					{% for dropItem in item.items() %}
+    					<li>
+    						<a href="{{ dropItem.route() }}">
+    							
+    				        {% if dropItem.tagline() is iterable %}
+    							<i class="fa fa-{{ dropItem.tagline()[0] }}"></i>
+    						    <span>{{ dropItem.tagline()[1] }}</span>		
+    					    {% else %}
+    						    <span>{{ dropItem.tagline() }}</span>										
+    					    {% endif %}
+    						
+    						</a>
+    					</li>
+    					{% endfor %}
+    					
+    				</ul>
+    			</li>
+    			{% else %}
+    			
+    			<li class="treeview{% if active == item.name() %} active{% endif %}">
+    				<a href="{{ item.route() }}">
+    					
+    			        {% if item.tagline() is iterable %}
+    						<i class="fa fa-{{ item.tagline()[0] }}"></i>
+    					    <span>{{ item.tagline()[1] }}</span>		
+    				    {% else %}
+    					    <span>{{ item.tagline() }}</span>										
+    				    {% endif %}
+    				
+    				</a>
+    			</li>
+    			
+    			{% endif %}
+    
+    		{% endfor %}
+    	
+    	{% endfor %}
+
+        
+      </ul>
+    </section>
+    <!-- /.sidebar -->
+    
+  </aside>

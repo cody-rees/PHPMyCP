@@ -1,0 +1,16 @@
+
+{% if submit is iterable %}
+	
+	{# Draw Button #}
+	{% for button in submit %}
+	
+	<div class="{{ button.divClass|default(['form-group pull-right col-sm-1'])|join(' ') }}">
+		<input type="submit" class="{{ button.class|default(['btn btn-default'])|join(' ') }}" value="{{ button.submit }}" {{ (button.formAction is defined) ? 'formaction=' ~ button.formAction }}>
+	</div>
+	
+	{% endfor %}
+	
+	
+{% else %}
+	<input type="submit" class="{{ submitClass|default(['btn btn-default pull-right'])|join(' ') }}" value="{{ submit }}">
+{% endif %}

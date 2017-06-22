@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   
+    <title> {{title}} </title>
+    <base href="{{base}}">
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Panel CSS -->
+    <link rel="stylesheet" href="{{ base }}/css/panel.css"> 
+   
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ base }}/libraries/bootstrap/css/bootstrap.min.css">
+  	
+  	<!-- Font Awesome -->
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">	
+ 	
+ 	<!-- Ionicons -->
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+   
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ base }}/libraries/dist/css/AdminLTE.min.css">
+    
+    <!-- AdminLTE Skin -->
+    <link rel="stylesheet" href="{{ base }}/libraries/dist/css/skins/skin-blue.min.css">
+
+    <!-- Base Template CSS -->
+    <link rel="stylesheet" href="{{base}}/css/panel.css">
+    
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+   
+    {# Allows Controllers to define stylesheets to be loaded into the base template #}
+    {% if stylesheets is defined %}
+        {% for url in stylesheets %}
+   
+    <link rel="stylesheet" type="text/css" href="{{base}}{{url}}">
+   
+        {% endfor %}
+    {% endif %}
+   
+    <!-- JQuery -->
+    <script src="{{base}}/libraries/jquery/jquery-3.1.1.min.js"></script>
+   
+    <!-- Bootstrap -->
+    <script src="{{base}}/libraries/bootstrap/js/bootstrap.min.js"></script>
+   
+    {# Allows Controllers to define scripts to be loaded into the base template #}
+    {% if scripts is defined %}
+        {% for url in scripts %}
+   
+    <script src="{{base}}{{url}}"></script>
+   
+        {% endfor %}
+    {% endif %}
+   
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+ 
+ 	<div class="wrapper">
+ 	
+    	<!-- Header -->
+    	{% include 'templates/panel/header.twig' %}
+    	<!-- /Header -->
+       
+       
+    	<!-- Navigation -->
+    	{% include 'templates/panel/navigation.twig' %}
+    	<!-- /Navigation -->
+       
+       <div class="content-wrapper">
+       
+       		<section class="content-header">
+       		
+				<ol class="breadcrumb" style="margin-bottom: 10px;">
+    				{% for breadcrumb in breadcrumbs|default([]) %}
+    				<li><a href="{{ breadcrumb['url'] }}">{% if breadcrumb['icon'] is defined %}<i class="fa fa-{{ breadcrumb['icon']  }}"></i>{% endif %}{{ breadcrumb['name']|default('breadcrumb_name') }}</a></li>
+    				{% endfor %}
+				</ol>
+				
+            	<h1>{{ header|default('page_title') }}</br>
+              		<small>{{ subheader|default('') }}</small>
+            	</h1>
+                  
+            </section>
+       
+       		<div class="content">
+       		
+			{# Callouts Types: callout-danger, callout-info, callout-warning #}
+			{% if calloutType is defined %}
+    			<!-- Callout -->
+    			<div class="callout {{calloutType}}">{{calloutMessage|raw}}</div>
+    			<!-- /Callout -->
+			{% endif %}
+       		
+	        {# Primary Content block, Views will be loaded here #}
+	        {% block content %}{% endblock %}
+	        </div>
+       
+       </div>
+       
+       <!-- Footer -->
+    	{% include 'templates/panel/footer.twig' %}
+    	<!-- /Navigation -->
+ 	
+ 	</div>
+ 
+   
+     <!-- SlimScroll -->
+    <script src="{{ base }}/libraries/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    
+    <!-- FastClick -->
+    <script src="{{ base }}/libraries/plugins/fastclick/fastclick.js"></script>
+    
+    <!-- AdminLTE App -->
+    <script src="{{ base }}/libraries/dist/js/app.min.js"></script>
+
+</body>
+</html>

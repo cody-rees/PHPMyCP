@@ -1,0 +1,17 @@
+{   
+    "autoload": {
+        "psr-4": {
+            "PhpMyCP\\": "app/src/PhpMyCP"
+        }
+    },
+    "require": {
+        "slim/slim": "^2.6",
+        "slim/views": "^0.1.3",
+        "twig/twig": "^1.23",
+        "illuminate/database": "^5.2",
+        "alexgarrett/violin": "2.*",
+        "cartalyst/sentinel": "2.0.*",
+        "illuminate/events": "^5.2",
+        "symfony/http-foundation": "^3.2"
+    }
+}
